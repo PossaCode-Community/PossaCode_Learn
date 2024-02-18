@@ -1,0 +1,19 @@
+{
+  "name": "possacode_javascript",
+  "version": "1.0.0",
+  "description": "Ceci est un cours sur l'esentiel du JavaScript pour React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch app.js"
+  },
+  "keywords": [
+    "JavaScript",
+    "Fetch API",
+    "Promises",
+    "Arrays",
+    "Objects"
+  ],
+  "author": "Fariol Blondeau",
+  "license": "ISC"
+}
