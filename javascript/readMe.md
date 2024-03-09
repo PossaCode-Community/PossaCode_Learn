@@ -19,14 +19,14 @@ Dans ce cours dedié au renforcement du JavaScript nous allons apprendre quelque
 
 #### 👉 const / let
 
-- **const**, en JavaScript `const` est utilisé pour definir une variable qui ne peut être changer ou modifier ni réinsigner. Par exemple:
+- **const**, en JavaScript `const` est utilisé pour definir une variable qui ne peut être changé ou modifié ni réinsigné. Par exemple:
 
   ```js
   const name = "possacode";
   ```
 
   ![sceen 1](./images/screen-1.png)
-  Cette variable `name` ne peut être redeclarer ni modifier, mais un object ou un tableau declaré avec `const`, peut etre mis à jour.
+  Cette variable `name` ne peut être redeclaré ni modifié, mais un object ou un tableau declaré avec `const`, peut etre mis à jour.
 
   Par exemple:
 
@@ -45,7 +45,7 @@ Dans ce cours dedié au renforcement du JavaScript nous allons apprendre quelque
   console.log(person); // person = {name: "Sanctifier", email:"contact@possacode.com"}
   ```
 
-- **let**, en JavaScript, on utlilise `let` pour définir une variable qui peut être reinsigner mais ne peut pas etre rédeclarer.
+- **let**, en JavaScript, on utlilise `let` pour définir une variable qui peut être reinsigné mais ne peut pas etre rédeclaré.
 
   Par exemple:
 

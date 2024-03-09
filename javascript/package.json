@@ -1,6 +1,7 @@
 {
   "name": "possacode_javascript",
   "version": "1.0.0",
+  "type": "module",
   "description": "Ceci est un cours sur l'esentiel du JavaScript pour React",
   "main": "index.js",
   "scripts": {
