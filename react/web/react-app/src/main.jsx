@@ -1,33 +1,13 @@
+import "./index.css";
+
 import React from "react";
 import { createRoot } from "react-dom/client";
+import App from "./App";
 
-const root = document.getElementById("root");
-// const element = React.createElement(
-//   "div",
-//   {
-//     style: {
-//       color: "red",
-//       backgroundColor: "blue",
-//     },
-//   },
-//   React.createElement(
-//     "p",
-//     {
-//       style: {
-//         color: "green",
-//         backgroundColor: "yellow",
-//       },
-//     },
-//     "Je suis un paragraphe !"
-//   )
-// );
+const root = document.querySelector("#root");
 
-const element = (
-  <div style={{ color: "red", backgroundColor: "blue" }}>
-    <p style={{ color: "green", backgroundColor: "yellow" }}>
-      Je suis un paragraphe !
-    </p>
-  </div>
+createRoot(root).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
-
-createRoot(root).render(element);

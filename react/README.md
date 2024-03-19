@@ -555,3 +555,292 @@ Si vous mettez à niveau un code source depuis React 16, vous pouvez laisser l'i
 Voici une capture d'écran montrant comment le code JSX que vous écrivez à gauche est transformé en React.createElement() à droite.
 
 ![Babel](./images/Screenshot%202024-03-14%20142638.png)
+
+### Exercice
+
+##### 🟢 Login status
+
+Complete the getLoginStatus method by returning a paragraph with the text: **You are logged in** when the user's logged in and a link to the login page otherwise with the text **Login**. The login page is located at `/login`.
+
+In summary:
+
+- when the user is logged in, you should only return a paragraph
+- otherwise you should only return an anchor (a tag)
+
+```javascript
+function getLoginStatus(isLoggedIn) {}
+
+console.log(getLoginStatus(true));
+console.log(getLoginStatus(false));
+```
+
+![La Roadmap pour apprendre React](/react//images/react-knowledge-map.png)
+
+### Expressions in JSX
+
+##### What is an expression
+
+Une expression est n'importe quel code JavaScript valide qui se résout en une valeur.
+Cela signifie que c'est n'importe quel code JavaScript qui aboutit à un résultat final, par exemple :
+
+- 3 + 4
+- "Sam"
+- new Date()
+- 2 \* 4
+- name (assuming the variable name has been declared).
+
+Et la liste continue.
+
+Chacune de ces expressions se résout en une valeur, par exemple :
+
+- 3 + 4 se résout au nombre 7.
+- "Sam" se résout à la chaîne de caractères "Sam".
+- new Date() se résout à un objet de date.
+- 2 \* 4 se résout au nombre 8.
+- name se résout à la valeur de cette variable, qui sera très probablement une chaîne de caractères.
+
+Vous pouvez utiliser ces expressions en JSX en les enveloppant avec des accolades `{}`.
+
+##### Basic example
+
+```javascript
+const title = <h1>You have {2 + 3} notifications</h1>;
+```
+
+Cela créera un élément `h1` avec le texte : **Vous avez 5 notifications**.
+
+Vous pouvez voir comment l'expression `(2 + 3)` est exécutée et se résout en 5, qui est ensuite remplacée pour que le texte final soit Vous avez 5 notifications. Pour que cela fonctionne, les expressions doivent être à l'intérieur de ces accolades.
+
+##### Variables
+
+Il est souvent utile d'avoir des variables dans ces expressions, par exemple, pour afficher le nom de l'utilisateur dans la barre de navigation :
+
+```javascript
+const user = {
+  id: 1,
+  name: "Hash",
+};
+
+const element = <p className="user-info">Welcome {user.name}!</p>;
+```
+
+Cela créera un élément p avec le texte : Bienvenue Hash !.
+
+##### Function calls
+
+Vous pouvez également appeler des fonctions à l'intérieur de ces expressions, par exemple :
+
+```javascript
+function capitalise(word) {
+  return word[0].toUpperCase() + word.substring(1).toLowerCase();
+}
+const name = "blondeau";
+
+const element = <p className="user-info">Welcome {capitalise(name)}</p>;
+```
+
+ce qui créera un paragraphe avec le texte : Bienvenue Blondeau (remarquez comment le B est en majuscule).
+
+##### Example
+
+Complete the `getNotifications` function such that it returns a `p` with the message: **You have X new notifications**
+Where **X** is the number of notifications.
+
+```javascript
+const notifications = [
+  {
+    id: 1,
+    text: "Your order has been delivered",
+  },
+  {
+    id: 2,
+    text: "Your coupon code has expired",
+  },
+];
+
+function getNotifications(notifications) {}
+
+const element = getNotifications(notifications);
+console.log(element);
+```
+
+**NB:** On retiendra que le `JSX` signifie _JavaScript XML_ et il permet d'ecrire la structure `HTML` dans un fichier `JavaScript` en utilisant `XML` comme syntaxe. **Mais ce n'est pas du HTML**
+
+## Les Composants
+
+Un composant `React` est une unité de construction fondamentale dans la bibliothèque `JavaScript` `React`. Les composants permettent de diviser l'interface utilisateur en morceaux réutilisables et autonomes, ce qui simplifie le développement et la maintenance des applications web.
+
+![Les composants React](./images/Screenshot%202024-03-19%20162612.png)
+
+Il existe deux grans types de composants en React:
+
+- **Composants de classe (Class Components)**
+  Ces composants sont définis en tant que classes JavaScript et étendent la classe React.Component. Ils ont un état (state) et des cycles de vie (lifecycle methods). Avant l'introduction des hooks, ils étaient la principale façon de créer des composants React. Voici un exemple de composant de classe:
+
+  ```javascript
+  import React, { Component } from "react";
+
+  class Welcome extends React.Component {
+    render() {
+      return <h1>Biencenue sur React</h1>;
+    }
+  }
+
+  export default Welcome;
+  ```
+
+- **Composants fonctionnels (Functional Components)**
+  Ces composants sont des fonctions JavaScript qui prennent des propriétés (props) en argument et retournent des éléments React. Avec l'introduction des hooks dans React, les composants fonctionnels sont devenus une méthode courante pour créer des composants React. Voici un exemple de composant fonctionnel :
+
+  ```javascript
+  import React from "react";
+
+  const Welcome = (props) => {
+    return <h1>Hello, {props.name}</h1>;
+  };
+
+  export default Welcome;
+  ```
+
+## Les Props (propriétés)
+
+En React, les `"props"` (propriétés) sont des arguments passés à des composants React. Les props sont utilisées pour transmettre des données d'un composant parent à un composant enfant. Elles sont immuables, ce qui signifie qu'elles ne peuvent pas être modifiées par le composant enfant.
+
+```javascript
+import React from "react";
+
+const Welcome = (props) => {
+  return <h1>Hello, {props.name}</h1>;
+};
+
+const App = () => {
+  return <Welcome name="John" />;
+};
+
+export default App;
+```
+
+Dans cet exemple, nous avons un composant `Welcome` qui prend une prop `name` et affiche un message de bienvenue personnalisé en utilisant cette `prop`. Dans le composant parent `App`, nous passons la prop `name` avec la valeur `"John"` au composant `Welcome`.
+
+**Les props peuvent être de tout type de données, y compris des chaînes de caractères, des nombres, des tableaux, des objets ou même des fonctions.**
+
+Les cas d'utilisation des props sont nombreux :
+
+1. **Personnalisation des composants** : Les props permettent de personnaliser le comportement et l'apparence des composants en leur transmettant des données.
+
+2. **Communication entre composants** : Les props facilitent la communication entre composants en permettant à un composant parent de transmettre des données à ses composants enfants.
+
+3. **Réutilisabilité des composants** : Les props rendent les composants réutilisables en leur permettant d'accepter différentes données en fonction du contexte dans lequel ils sont utilisés.
+
+4. **Configuration dynamique** : Les props permettent de configurer dynamiquement les composants en leur passant différentes valeurs pour les rendre adaptables à différentes situations.
+
+5. **Composition de composants** : Les composants peuvent être composés les uns dans les autres en passant des props de haut en bas dans la hiérarchie des composants, ce qui permet de construire des interfaces utilisateur complexes à partir de composants simples.
+
+En résumé, les props sont un mécanisme fondamental dans React pour transmettre des données entre les composants et pour personnaliser le comportement et l'apparence des composants. Elles jouent un rôle essentiel dans la création d'applications React modulaires, réutilisables et dynamiques.
+
+## Les hooks en React
+
+Les hooks sont une fonctionnalité introduite dans React `16.8` pour permettre aux développeurs d'utiliser des fonctionnalités de React telles que l'état (state) et les effets secondaires (side effects) dans les composants fonctionnels, qui étaient auparavant réservées aux composants de classe.
+
+Avant l'introduction des hooks, les composants fonctionnels étaient principalement utilisés pour des composants simples, tandis que les composants de classe étaient nécessaires pour des fonctionnalités plus avancées telles que la gestion de l'état et les effets secondaires. Les hooks ont changé cela en permettant aux composants fonctionnels de gérer l'état et d'effectuer des actions telles que des appels réseau, la souscription à des événements, etc.
+
+Voici quelques-uns des hooks les plus couramment utilisés en React :
+
+- **useState** : Permet aux composants fonctionnels de gérer leur propre état local. Il renvoie un état actuel et une fonction pour le mettre à jour.
+
+  ```javascript
+  const [state, setState] = React.useState(initialState);
+  ```
+
+- **useEffect** : Permet aux composants fonctionnels d'effectuer des effets secondaires, tels que des appels réseau, la souscription à des événements, la mise à jour du DOM, etc. Il est exécuté après chaque rendu et peut être utilisé pour effectuer des actions côté client.
+
+  ```javascript
+  React.useEffect(() => {
+    //Side effects here
+
+    return () => {
+      //Cleanup (optional)
+    };
+  }, [dependencies]);
+  ```
+
+- **useContext** : Permet aux composants fonctionnels d'accéder au contexte de React. Il prend un objet de contexte (créé par React.createContext) en argument et renvoie la valeur actuelle du contexte.
+
+  ```javascript
+  const value = React.uesContext(MyContext);
+  ```
+
+- **useReducer** : Permet d'utiliser le modèle de réduction pour gérer l'état de manière plus complexe. Il est similaire à useState, mais plutôt que de gérer un seul état, il gère un état qui peut être mis à jour en fonction d'une action.
+
+  ```javascript
+  const [state, dispatch] = React.usereducer(reducer, initialArgument);
+  ```
+
+- **useCallback** : Renvoie une fonction memoisée qui ne sera pas réexécutée à chaque rendu, à moins que ses dépendances ne changent. Utile pour optimiser les performances en évitant la recréation de fonctions à chaque rendu.
+
+  ```javascript
+  const memorizedCallback = React.useCallback(() => {
+    //Your callback function
+  }, [dependencies]);
+  ```
+
+- **useMemo** : Renvoie une valeur memoisée qui ne sera recalculée que si l'une de ses dépendances change. Utile pour optimiser les performances en évitant le recalcul inutile de valeurs calculées.
+
+  ```javascript
+  const memorizedValue = React.useMemo(
+    () => computeExpensiveValue(a, b),
+    [a, b]
+  );
+  ```
+
+- **useRef** : Renvoie un objet mutuable (ref) dont la propriété current peut être utilisée pour stocker une valeur mutable arbitraire. Utile pour accéder à des nœuds DOM ou pour stocker des valeurs persistantes entre les rendus.
+
+  ```javascript
+  const elementRef = React.useRef(initialValue);
+  ```
+
+Les hooks permettent aux développeurs de tirer parti des fonctionnalités de React dans les composants fonctionnels, offrant ainsi une syntaxe plus concise et une meilleure réutilisabilité du code. Ils ont considérablement simplifié le développement d'applications React en permettant aux développeurs d'écrire des composants plus simples, plus propres et plus performants.
+
+### 🍉 Creating Components with State
+
+- Functional component with State:
+
+  ```javascript
+  import React from "react";
+
+  function Counter() {
+    const [count, setCount] = React.useState(0);
+
+    return(
+      <div>
+          <p>You cliked {count} times</p>
+          <button onClick={() => setCount((prevCount) => prevCount + 1)}>Cliked Me</button>
+      </div>;
+    )
+  }
+  ```
+
+- Class Component with State
+
+  ```javascript
+  class Counter extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { count: 0 };
+    }
+
+    render() {
+      return (
+        <div>
+          <p>You cliked {this.count} times</p>
+          <button
+            onClick={() => this.setState({ count: this.state.count + 1 })}>
+            Cliked Me
+          </button>
+        </div>
+      );
+    }
+  }
+  ```
+
+- #### useState
